@@ -1,0 +1,35 @@
+server:
+  port: 8080
+  error:
+    include-message: always
+
+spring:
+  application:
+    name: PrograMobilAPI_S2_2024
+  datasource:
+    url:jdbc: postgresql://localhost:5432/db_programobil
+    username: postgres
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        ddl-auto: false
+    show-sql: true
+    open-in-view: false
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+    codec:
+      max-in-memory-size: 10MB
+  media:
+    location: mediafiles
+  # Configuración para el manejo de CORS
+  web:
+    cors:
+      allowed-origins: "*"
+      allowed-methods: GET, POST, PUT, DELETE
+      allowed-headers: "*"
