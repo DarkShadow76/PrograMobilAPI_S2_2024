@@ -46,7 +46,12 @@ public class Usuario {
   private String contrasenia;
 
   // Relacion 1 a 1
-  private UUID id_padre;
+  @OneToOne(
+      mappedBy = "usuario",
+      cascade = CascadeType.ALL,
+      fetch = FetchType.LAZY
+  )
+  private Padre padre;
 
   @CreationTimestamp
   private LocalDateTime created_at;

@@ -26,7 +26,7 @@ public class Padre {
       updatable = false,
       nullable = false
   )
-  private UUID id_padre;
+  private UUID padre_id;
 
   @Column(
       nullable = false
@@ -48,6 +48,13 @@ public class Padre {
       nullable = false
   )
   private LocalDate fecha_nacimiento;
+
+  @OneToOne
+  @JoinColumn(
+      name = "usuario_id",
+      referencedColumnName = "usuario_id"
+  )
+  private Usuario usuario;
 
   @CreationTimestamp
   private LocalDateTime created_at;
