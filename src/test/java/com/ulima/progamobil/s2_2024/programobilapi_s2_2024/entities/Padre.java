@@ -5,29 +5,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
+@Table(name = "padres")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class Padre {
-  @Id
-  @GeneratedValue(
-      strategy = GenerationType.AUTO
-  )
-  @Column(
-      updatable = false,
-      nullable = false
-  )
-  private UUID padre_id;
-
+@AttributeOverride(
+    name = "usuario_id",
+    column = @Column(
+        name = "padre_id"
+    )
+)
+public class Padre extends Usuario{
   @Column(
       nullable = false
   )
@@ -55,10 +48,4 @@ public class Padre {
       referencedColumnName = "usuario_id"
   )
   private Usuario usuario;
-
-  @CreationTimestamp
-  private LocalDateTime created_at;
-
-  @UpdateTimestamp
-  private LocalDateTime updated_at;
 }

@@ -2,6 +2,7 @@ package com.ulima.progamobil.s2_2024.programobilapi_s2_2024.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,22 +15,27 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
+@Table(
+    name = "usuarios"
+)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class Usuario {
+public abstract class Usuario {
   @Id
   @GeneratedValue(
       strategy = GenerationType.AUTO
   )
   @Column(
+      name = "usuario_id",
       updatable = false,
       nullable = false
   )
   private UUID usuario_id;
 
   @NotBlank
+  @Email
   @Column(
       unique = true,
       nullable = false
@@ -45,17 +51,26 @@ public class Usuario {
   )
   private String contrasenia;
 
-  // Relacion 1 a 1
-  @OneToOne(
-      mappedBy = "usuario",
-      cascade = CascadeType.ALL,
-      fetch = FetchType.LAZY
-  )
-  private Padre padre;
+  /*
+  Incluir Roles para los usuarios: Many to Many
+  admin
+  padre
+  profesional_salud
+  */
+
+  private boolean enabled;
+
+  @Transient
+  private boolean admin;
 
   @CreationTimestamp
   private LocalDateTime created_at;
 
   @UpdateTimestamp
   private LocalDateTime updated_at;
+
+  @PrePersist
+  public void prePersist(){
+    enabled=true;
+  }
 }
