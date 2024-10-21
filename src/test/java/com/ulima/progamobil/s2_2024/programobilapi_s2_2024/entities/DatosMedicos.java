@@ -1,59 +1,55 @@
 package com.ulima.progamobil.s2_2024.programobilapi_s2_2024.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
-@Table(name = "padres")
+@Table(
+    name = "datos_medicos"
+)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-@AttributeOverride(
-    name = "usuario_id",
-    column = @Column(
-        name = "padre_id",
-        updatable = false,
-        nullable = false
-    )
-)
-public class Padre extends Usuario{
-  @NotBlank
+public class DatosMedicos {
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(
+      name = "datos_medicos_id",
+      updatable = false,
       nullable = false
   )
-  private String nombre;
-
-  @NotBlank
-  @Column(
-      nullable = false
-  )
-  private String apellido;
-
-  @NotBlank
-  @Column(
-      unique = true,
-      nullable = false
-  )
-  private String dni;
+  private UUID id;
 
   @Column(
       nullable = false
   )
-  private LocalDate fecha_nacimiento;
+  private String alergias;
+
+  @Column(
+      nullable = false
+  )
+  private String enfermedadesPreexistentes;
+
+  @OneToOne
+  @JoinColumn(
+      name = "perfil_id",
+      referencedColumnName = "perfil_id",
+      nullable = false
+  )
+  private PerfilPaciente perfilPaciente;
 
   @OneToMany(
-      mappedBy = "padre",
+      mappedBy = "datosMedicos",
       cascade = CascadeType.ALL,
       orphanRemoval = true
   )
-  private List<PerfilPaciente> perfilPacientes =  new ArrayList<>();
+  private List<RegistroMedico> registroMedicos = new ArrayList<>();
 }

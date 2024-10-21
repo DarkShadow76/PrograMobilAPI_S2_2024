@@ -24,7 +24,7 @@ import lombok.experimental.SuperBuilder;
         nullable = false
     )
 )
-public class profesional_salud extends Usuario{
+public class ProfesionalSalud extends Usuario{
     @Column(
         nullable = false
     )

@@ -10,22 +10,24 @@ import lombok.experimental.SuperBuilder;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
-@Table(name = "padres")
+@Table(name = "perfil_paciente")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-@AttributeOverride(
-    name = "usuario_id",
-    column = @Column(
-        name = "padre_id",
-        updatable = false,
-        nullable = false
-    )
-)
-public class Padre extends Usuario{
+public class PerfilPaciente {
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(
+      name = "perfil_id",
+      updatable = false,
+      nullable = false
+  )
+  private UUID perfilId;
+
   @NotBlank
   @Column(
       nullable = false
@@ -38,22 +40,30 @@ public class Padre extends Usuario{
   )
   private String apellido;
 
-  @NotBlank
   @Column(
-      unique = true,
       nullable = false
   )
-  private String dni;
+  private LocalDate fechaNacimiento;
 
-  @Column(
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(
+      name = "padre_id",
       nullable = false
   )
-  private LocalDate fecha_nacimiento;
+  private Padre Padre;
 
   @OneToMany(
-      mappedBy = "padre",
+      mappedBy = "perfilPaciente",
       cascade = CascadeType.ALL,
       orphanRemoval = true
   )
-  private List<PerfilPaciente> perfilPacientes =  new ArrayList<>();
+  private List<EsquemaVacunacion> esquemasVacunacion = new ArrayList<>();
+
+  @OneToOne(
+      mappedBy = "perfilPaciente",
+      cascade = CascadeType.ALL,
+      orphanRemoval = true
+  )
+  private DatosMedicos datosMedicos;
+
 }
