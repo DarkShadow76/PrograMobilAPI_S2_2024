@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "padres")
+@Table(name = "profesionales_salud")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,7 +19,9 @@ import lombok.experimental.SuperBuilder;
 @AttributeOverride(
     name = "usuario_id",
     column = @Column(
-        name = "profesional_salud_id"
+        name = "profesional_salud_id",
+        updatable = false,
+        nullable = false
     )
 )
 public class profesional_salud extends Usuario{
