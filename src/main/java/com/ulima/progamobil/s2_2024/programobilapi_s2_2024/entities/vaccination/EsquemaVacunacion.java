@@ -1,5 +1,6 @@
-package com.ulima.progamobil.s2_2024.programobilapi_s2_2024.entities;
+package com.ulima.progamobil.s2_2024.programobilapi_s2_2024.entities.vaccination;
 
+import com.ulima.progamobil.s2_2024.programobilapi_s2_2024.entities.users.PerfilPaciente;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

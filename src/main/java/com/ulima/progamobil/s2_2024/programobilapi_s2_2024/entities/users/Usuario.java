@@ -1,4 +1,4 @@
-package com.ulima.progamobil.s2_2024.programobilapi_s2_2024.entities;
+package com.ulima.progamobil.s2_2024.programobilapi_s2_2024.entities.users;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;

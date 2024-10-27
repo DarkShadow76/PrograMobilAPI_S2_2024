@@ -1,5 +1,8 @@
-package com.ulima.progamobil.s2_2024.programobilapi_s2_2024.entities;
+package com.ulima.progamobil.s2_2024.programobilapi_s2_2024.entities.users;
 
+import com.ulima.progamobil.s2_2024.programobilapi_s2_2024.entities.appointments.Cita;
+import com.ulima.progamobil.s2_2024.programobilapi_s2_2024.entities.medical.DatosMedicos;
+import com.ulima.progamobil.s2_2024.programobilapi_s2_2024.entities.vaccination.EsquemaVacunacion;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -66,4 +69,10 @@ public class PerfilPaciente {
   )
   private DatosMedicos datosMedicos;
 
+  @OneToMany(
+      mappedBy = "perfilPaciente",
+      cascade = CascadeType.ALL,
+      orphanRemoval = true
+  )
+  private List<Cita> citas = new ArrayList<>();
 }
