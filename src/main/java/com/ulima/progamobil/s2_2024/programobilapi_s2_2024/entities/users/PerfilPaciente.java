@@ -2,6 +2,7 @@ package com.ulima.progamobil.s2_2024.programobilapi_s2_2024.entities.users;
 
 import com.ulima.progamobil.s2_2024.programobilapi_s2_2024.entities.appointments.Cita;
 import com.ulima.progamobil.s2_2024.programobilapi_s2_2024.entities.medical.DatosMedicos;
+import com.ulima.progamobil.s2_2024.programobilapi_s2_2024.entities.vaccination.CitaVacunacion;
 import com.ulima.progamobil.s2_2024.programobilapi_s2_2024.entities.vaccination.EsquemaVacunacion;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -75,4 +76,11 @@ public class PerfilPaciente {
       orphanRemoval = true
   )
   private List<Cita> citas = new ArrayList<>();
+
+  @OneToMany(
+      mappedBy = "perfilPaciente",
+      cascade = CascadeType.ALL,
+      orphanRemoval = true
+  )
+  private List<CitaVacunacion> citaVacunacion = new ArrayList<>();
 }
