@@ -23,10 +23,10 @@ import java.util.UUID;
 @AllArgsConstructor
 @SuperBuilder
 public class PerfilPaciente {
+
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(
-      name = "perfil_id",
+  @Column(name = "perfil_id",
       updatable = false,
       nullable = false
   )
@@ -49,13 +49,26 @@ public class PerfilPaciente {
   )
   private LocalDate fechaNacimiento;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  // Relación ManyToOne con Padre
+  @ManyToOne(
+      fetch = FetchType.LAZY
+  )
   @JoinColumn(
       name = "padre_id",
       nullable = false
   )
-  private Padre Padre;
+  private Padre padre;
 
+  // Relación OneToOne con Usuario
+  @OneToOne
+  @JoinColumn(
+      name = "usuario_id",
+      referencedColumnName = "usuario_id",
+      nullable = false
+  )
+  private Usuario usuario;
+
+  // Otras relaciones
   @OneToMany(
       mappedBy = "perfilPaciente",
       cascade = CascadeType.ALL,

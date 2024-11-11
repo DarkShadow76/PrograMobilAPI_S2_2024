@@ -24,7 +24,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public abstract class Usuario {
+public class Usuario {
   @Id
   @GeneratedValue(
       strategy = GenerationType.AUTO
@@ -53,12 +53,6 @@ public abstract class Usuario {
   )
   private String contrasenia;
 
-  /*
-  Incluir Roles para los usuarios: Many to Many
-  admin
-  padre
-  profesional_salud
-  */
   @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinTable(
       name = "usuario_roles",

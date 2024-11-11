@@ -12,19 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "padres")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-@AttributeOverride(
-    name = "usuario_id",
-    column = @Column(
-        name = "padre_id",
-        updatable = false,
-        nullable = false
-    )
-)
 public class Padre extends Usuario{
   @NotBlank
   @Column(

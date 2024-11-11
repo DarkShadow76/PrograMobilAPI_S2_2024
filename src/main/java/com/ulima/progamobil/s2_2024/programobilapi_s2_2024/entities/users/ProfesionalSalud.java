@@ -12,19 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "profesionales_salud")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-@AttributeOverride(
-    name = "usuario_id",
-    column = @Column(
-        name = "profesional_salud_id",
-        updatable = false,
-        nullable = false
-    )
-)
 public class ProfesionalSalud extends Usuario{
     @Column(
         nullable = false
